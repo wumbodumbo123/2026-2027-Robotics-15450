@@ -44,9 +44,6 @@ public class MecanumDrive{
         double backLeftPower = forward - strafe + rotate;
         double backRightPower = forward + strafe - rotate;
 
-        double maxPower;
-        double maxSpeed;
-
         leftBack.setPower(backLeftPower);
         leftFront.setPower(frontLeftPower);
         rightFront.setPower(frontRightPower);
@@ -56,11 +53,15 @@ public class MecanumDrive{
 
     public void driveFieldRelative(double forward, double strafe, double rotate) {
 
+        // angle
         double theta = Math.atan2(forward, strafe);
+
+        // magnitude
         double r = Math.hypot(forward, strafe);
 
         theta = AngleUnit.normalizeRadians(theta - imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
 
+        // force
         double newForward = r * Math.sin(theta);
         double newStrafe = r * Math.cos(theta);
 
