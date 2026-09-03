@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-public class MecanumDrive{
+public class MecanumDrive {
     public IMU imu;
     public DcMotorEx leftFront, leftBack, rightFront, rightBack;
     public void init(HardwareMap hwMap) {
@@ -39,11 +39,13 @@ public class MecanumDrive{
 
     public void drive(double forward, double strafe, double rotate) {
 
+        // creates values for power
         double frontLeftPower = forward + strafe + rotate;
         double frontRightPower = forward - strafe - rotate;
         double backLeftPower = forward - strafe + rotate;
         double backRightPower = forward + strafe - rotate;
 
+        // sets power
         leftBack.setPower(backLeftPower);
         leftFront.setPower(frontLeftPower);
         rightFront.setPower(frontRightPower);
