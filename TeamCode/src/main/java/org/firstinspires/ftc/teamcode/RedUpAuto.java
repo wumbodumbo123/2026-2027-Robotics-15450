@@ -23,18 +23,22 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 @Autonomous(name="RedUpAuto", group = "Auto")
 public class RedUpAuto extends OpMode {
 
+    // set variables
+    double x, y, area;
     private Limelight3A limelight;
+    MecanumDrive drive = new MecanumDrive();
 
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
     //poses
-
     private final Pose startPose = p.of(1,2,3);
     private final Pose endPose = p.of(1,2,3);
 
     @Override
     public void init() {
+        drive.init(hardwareMap);
+
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.setPollRateHz(10);
         limelight.start();
@@ -49,10 +53,10 @@ public class RedUpAuto extends OpMode {
     @Override
     public void loop() {
 
-        // Aprill Tags
+        // April Tags
         LLResult result = limelight.getLatestResult();
 
-        // Aprill Tag results
+        // April Tag results
         if (result != null && result.isValid()) {
             double Tx = result.getTx(); // how far left or right
             double Ty = result.getTy(); // how far up or down
@@ -74,6 +78,19 @@ public class RedUpAuto extends OpMode {
             double y = colorTarget.getTargetYDegrees();
             double area = colorTarget.getTargetArea();
             telemetry.addData("color target", "takes up " + area + "% of the image");
+        }
+
+        FollowBall(x, y, area);
+    }
+
+    public void FollowBall(double x, double y, double area) {
+        // Requires Tuning
+        if (x == -1) {
+            drive.drive(0, 0, -0.1);
+        } else if (x == 1) {
+            drive.drive(0, 0, 0.1);
+        } else {
+            drive.drive(0, 0, 0);
         }
     }
 
