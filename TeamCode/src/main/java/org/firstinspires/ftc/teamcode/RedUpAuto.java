@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(name="RedUpAuto", group = "Auto")
+@Autonomous(name="RedUpAuto", group="Auto")
 public class RedUpAuto extends OpMode {
 
     // set variables
@@ -52,6 +52,16 @@ public class RedUpAuto extends OpMode {
 
     @Override
     public void loop() {
+
+        // sleep in case of delay needed
+
+        /*
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+         */
 
         // April Tags
         LLResult result = limelight.getLatestResult();

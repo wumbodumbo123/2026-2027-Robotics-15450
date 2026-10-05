@@ -36,6 +36,8 @@ public class BaseAuto extends OpMode {
     @Override
     public void loop() {
 
+
+
     }
 
     // every Path from one point to the next should be a different function (private Path)
