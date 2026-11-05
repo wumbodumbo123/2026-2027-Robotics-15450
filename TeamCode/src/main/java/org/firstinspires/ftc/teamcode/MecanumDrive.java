@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -9,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDrive {
     public IMU imu;
-    public DcMotorEx leftFront, leftBack, rightFront, rightBack;
+    public DcMotorEx leftFront, leftBack, rightFront, rightBack, Launcher;
     public void init(HardwareMap hwMap) {
 
         //create motorex variables
@@ -18,11 +19,17 @@ public class MecanumDrive {
         rightFront = hwMap.get(DcMotorEx.class, "rightFront");
         rightBack = hwMap.get(DcMotorEx.class, "rightBack");
 
+        Launcher = hwMap.get(DcMotorEx.class, "Launcher");
+
         //set reverse if needed
         leftBack.setDirection(DcMotorEx.Direction.FORWARD);
         leftFront.setDirection(DcMotorEx.Direction.FORWARD);
         rightBack.setDirection(DcMotorEx.Direction.FORWARD);
         rightFront.setDirection(DcMotorEx.Direction.FORWARD);
+
+        Launcher.setDirection(DcMotorEx.Direction.FORWARD);
+
+
 
         //create imu
         imu = hwMap.get(IMU.class, "imu");
@@ -33,6 +40,10 @@ public class MecanumDrive {
 
         imu.initialize(new IMU.Parameters(RevOrientation));
 
+    }
+
+    public void LauncherPower(double power) {
+        Launcher.setPower(power);
     }
 
     public void drive(double forward, double strafe, double rotate) {

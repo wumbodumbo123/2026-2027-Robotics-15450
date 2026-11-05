@@ -5,18 +5,23 @@ import static com.pedropathing.api.Paths.line;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Scheduler;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import com.pedropathing.ivy.Command;
+
+import static com.pedropathing.ivy.groups.Groups.sequential;
+import static com.pedropathing.ivy.pedro.PedroCommands.*;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 // change name to something else.
 @Autonomous(name="BaseAuto", group="Auto")
 public class BaseAuto extends OpMode {
-
     private Follower follower;
+    MecanumDrive drive = new MecanumDrive();
     private final PoseFactory p = PoseFactory.degrees();
 
     // Make new poses (Where you want the robot to go) here
@@ -29,14 +34,40 @@ public class BaseAuto extends OpMode {
     public void init() {
         // Initializes The Robot for the autonomous
         follower = Constants.create(hardwareMap);
+        drive.init(hardwareMap);
+
         follower.setPose(startPose);
+
+        // makes a step in the process of following the autonomous.
+        // Command to follow path
+        Command OnetoTwo = sequential(
+                follow(follower, one())
+        );
+
+        // makes a more complex command
+        // used for movement of extra objects on robot
+        Command claw = Command.build()
+                // does something at the start of the command
+                .setStart(() -> {})
+                // continues doing the execute until goal is reached
+                .setExecute(() -> { drive.LauncherPower(1.0); })
+                // the goal
+                .setDone(() -> { return true;})
+                // the type of end it reached (Interrupted, Blocked, Conflict)
+                .setEnd(endCondition -> {});
+
+        // Schedules the command made
+
+        Scheduler.schedule(claw);
+        Scheduler.schedule(OnetoTwo);
 
     }
 
     @Override
     public void loop() {
 
-
+        // Runs all commands scheduled
+        Scheduler.execute();
 
     }
 
@@ -49,7 +80,6 @@ public class BaseAuto extends OpMode {
     private Path one() {
         // line is start point to end point linear is talking about the direction the robot is facing
         return line(startPose, endPose).linear(startPose, endPose);
-
     }
 
     // This makes a curve

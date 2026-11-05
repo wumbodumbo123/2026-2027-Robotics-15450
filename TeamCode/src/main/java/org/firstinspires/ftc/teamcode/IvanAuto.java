@@ -2,9 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
+import static com.pedropathing.ivy.groups.Groups.sequential;
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.ivy.Command;
+import com.pedropathing.ivy.Scheduler;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -14,8 +18,9 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 // change name to something else.
 @Autonomous(name="BaseAuto", group="Auto")
-public class IvanAuto extends OpMode {
 
+public class IvanAuto extends OpMode {
+    MecanumDriveCopy caca = new MecanumDriveCopy();
     private Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
@@ -45,12 +50,50 @@ public class IvanAuto extends OpMode {
         follower = Constants.create(hardwareMap);
         follower.setPose(startleavehub);
 
+        // makes a step in the process of following the autonomous.
+        // Command to follow path
+        Command abc = Command.build()
+                .setStart(() -> {})
+                .setExecute(() -> { caca.caca(0,1.0); })
+                .setDone(() -> { return true;})
+                .setEnd(endCondition -> {}
+                );
+
+        Command OnetoTwo = sequential(
+                follow(follower, one())
+        );
+        Command TwotoThree = sequential(
+                follow(follower, two())
+        );
+        Command ThreetoFour = sequential(
+                follow(follower, three())
+        );
+        Command FourtoFive = sequential(
+                follow(follower, four()),
+                abc
+        );
+        Command FivetoSix = sequential(
+                follow(follower, five())
+        );
+        Command End = sequential(
+                follow(follower, six())
+        );
+
+
+
+        Scheduler.schedule(OnetoTwo);
+        Scheduler.schedule(TwotoThree);
+        Scheduler.schedule(ThreetoFour);
+        Scheduler.schedule(FourtoFive);
+        Scheduler.schedule(FivetoSix);
+        Scheduler.schedule(End);
     }
 
     @Override
     public void loop() {
 
-
+        // Runs all commands scheduled
+        Scheduler.execute();
 
     }
 
@@ -63,7 +106,6 @@ public class IvanAuto extends OpMode {
     private Path one() {
         // line is start point to end point linear is talking about the direction the robot is facing
         return line(startleavehub, endleavehub).constant(startleavehub);
-
     }
     private Path two(){
         return line(startlongdown, endlongdown).linear(startlongdown, endlongdown);
