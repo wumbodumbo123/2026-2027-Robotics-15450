@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -10,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDrive {
     public IMU imu;
-    public DcMotorEx leftFront, leftBack, rightFront, rightBack, Launcher;
+    public DcMotorEx leftFront, leftBack, rightFront, rightBack, Launcher, Intake;
     public void init(HardwareMap hwMap) {
 
         //create motorex variables
@@ -21,6 +20,8 @@ public class MecanumDrive {
 
         Launcher = hwMap.get(DcMotorEx.class, "Launcher");
 
+        Intake = hwMap.get(DcMotorEx.class, "Intake");
+
         //set reverse if needed
         leftBack.setDirection(DcMotorEx.Direction.FORWARD);
         leftFront.setDirection(DcMotorEx.Direction.FORWARD);
@@ -29,7 +30,7 @@ public class MecanumDrive {
 
         Launcher.setDirection(DcMotorEx.Direction.FORWARD);
 
-
+        Intake.setDirection(DcMotorEx.Direction.FORWARD);
 
         //create imu
         imu = hwMap.get(IMU.class, "imu");
@@ -44,6 +45,38 @@ public class MecanumDrive {
 
     public void LauncherPower(double power) {
         Launcher.setPower(power);
+    }
+
+    public void IntakePower(double power) {
+        Intake.setPower(power);
+    }
+
+    public void WheelTest(String wheel, double Power) {
+
+        switch(wheel) {
+            case "LB":
+                leftBack.setPower(Power);
+                break;
+            case "LF":
+                leftFront.setPower(Power);
+                break;
+            case "RF":
+                rightFront.setPower(Power);
+                break;
+            case "RB":
+                rightBack.setPower(Power);
+                break;
+            case "LA":
+                Launcher.setPower(Power);
+                break;
+            case "IN":
+                Intake.setPower(Power);
+                break;
+            default:
+                System.out.println("Errorrrrrrr");
+
+        }
+
     }
 
     public void drive(double forward, double strafe, double rotate) {

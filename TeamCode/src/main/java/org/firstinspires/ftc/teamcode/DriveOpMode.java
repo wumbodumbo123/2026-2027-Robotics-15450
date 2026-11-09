@@ -22,8 +22,7 @@ public class DriveOpMode extends OpMode {
     public void loop() {
 
         driveLoop();
-        LauncherLoop();
-        IntakeLoop();
+        ShootingLoop();
 
     }
 
@@ -36,21 +35,23 @@ public class DriveOpMode extends OpMode {
         // call driveFieldRelative class from MecanumDrive
         drive.driveFieldRelative(forward, strafe, rotate);
 
-
     }
 
-    public void LauncherLoop() {
+    public void ShootingLoop() {
 
         if (gamepad2.aWasPressed()) {
             drive.LauncherPower(1);
+            drive.IntakePower(1);
         }
 
         if (gamepad2.yWasPressed()) {
             drive.LauncherPower(0);
+            drive.IntakePower(0);
         }
 
         if (gamepad2.xWasPressed()) {
             drive.LauncherPower(-1);
+            drive.IntakePower(-1);
         }
 
     }
