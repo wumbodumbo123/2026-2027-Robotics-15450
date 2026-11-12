@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class MecanumDrive {
     public IMU imu;
-    public DcMotorEx leftFront, leftBack, rightFront, rightBack, Launcher, Intake;
+    public DcMotorEx leftFront, leftBack, rightFront, rightBack, Launcher, IntakeBack, IntakeFront;
     public void init(HardwareMap hwMap) {
 
         //create motorex variables
@@ -20,7 +20,8 @@ public class MecanumDrive {
 
         Launcher = hwMap.get(DcMotorEx.class, "Launcher");
 
-        Intake = hwMap.get(DcMotorEx.class, "Intake");
+        IntakeBack = hwMap.get(DcMotorEx.class, "Intake");
+        IntakeFront = hwMap.get(DcMotorEx.class, "Intake");
 
         //set reverse if needed
         leftBack.setDirection(DcMotorEx.Direction.FORWARD);
@@ -30,7 +31,8 @@ public class MecanumDrive {
 
         Launcher.setDirection(DcMotorEx.Direction.FORWARD);
 
-        Intake.setDirection(DcMotorEx.Direction.FORWARD);
+        IntakeBack.setDirection(DcMotorEx.Direction.FORWARD);
+        IntakeFront.setDirection(DcMotorEx.Direction.FORWARD);
 
         //create imu
         imu = hwMap.get(IMU.class, "imu");
@@ -48,7 +50,8 @@ public class MecanumDrive {
     }
 
     public void IntakePower(double power) {
-        Intake.setPower(power);
+        IntakeBack.setPower(power);
+        IntakeFront.setPower(power);
     }
 
     public void WheelTest(String wheel, double Power) {
@@ -69,8 +72,11 @@ public class MecanumDrive {
             case "LA":
                 Launcher.setPower(Power);
                 break;
-            case "IN":
-                Intake.setPower(Power);
+            case "IN1":
+                IntakeBack.setPower(Power);
+                break;
+            case "IN2":
+                IntakeFront.setPower(Power);
                 break;
             default:
                 System.out.println("Errorrrrrrr");

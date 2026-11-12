@@ -51,10 +51,15 @@ public class MotorDirectionTester extends OpMode {
         }
 
         if (gamepad2.bWasPressed()) {
-            drive.WheelTest("IN", 1);
+            drive.WheelTest("IN1", 1);
         } else if (gamepad2.bWasReleased()) {
-            drive.WheelTest("IN", 0);
+            drive.WheelTest("IN1", 0);
         }
 
+        if (gamepad2.xWasPressed()) {
+            drive.WheelTest("IN2", 1);
+        } else if (gamepad2.xWasReleased()) {
+            drive.WheelTest("IN2", 0);
+        }
     }
 }
