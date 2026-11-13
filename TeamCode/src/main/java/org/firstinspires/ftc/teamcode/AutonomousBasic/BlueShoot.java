@@ -4,9 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.lib.MecanumDrive;
 
-@Autonomous(group = "Auto", name = "RedShoot")
+@Autonomous(group = "Auto", name = "BlueShoot")
 public class BlueShoot extends OpMode {
 
     MecanumDrive Drive = new MecanumDrive();

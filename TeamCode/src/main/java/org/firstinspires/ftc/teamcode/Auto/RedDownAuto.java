@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
-import static com.pedropathing.ivy.groups.Groups.parallel;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 
@@ -15,9 +14,10 @@ import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.lib.MecanumDrive;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(group = "Auto", name = "RedUpAuto")
+@Autonomous(group = "Auto", name = "RedDownAuto")
 public class RedDownAuto extends OpMode {
 
     private Follower follower;

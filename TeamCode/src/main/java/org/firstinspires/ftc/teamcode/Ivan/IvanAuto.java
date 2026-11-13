@@ -14,10 +14,11 @@ import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.lib.MecanumDriveCopy;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 // change name to something else.
-@Autonomous(name="BaseAuto", group="Auto")
+@Autonomous(group = "Auto", name = "IvanAuto")
 
 public class IvanAuto extends OpMode {
     MecanumDriveCopy caca = new MecanumDriveCopy();

@@ -1,23 +1,17 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.LLResultTypes.ColorResult;
-import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.pedropathing.follower.Follower;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
-import static com.pedropathing.api.Paths.*;
 
-import androidx.annotation.ColorRes;
-
-import com.pedropathing.paths.Path;
 import java.util.List;
 
+import org.firstinspires.ftc.teamcode.lib.MecanumDrive;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @Autonomous(name="RedUpAuto", group="Auto")

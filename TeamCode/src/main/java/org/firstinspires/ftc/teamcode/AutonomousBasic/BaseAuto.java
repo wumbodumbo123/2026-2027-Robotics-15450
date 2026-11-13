@@ -16,11 +16,11 @@ import com.pedropathing.ivy.Command;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.pedro.PedroCommands.*;
 
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.lib.MecanumDrive;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 // change name to something else.
-@Autonomous(name="BaseAuto", group="Auto")
+@Autonomous(group = "Auto", name = "BaseAuto")
 public class BaseAuto extends OpMode {
     private Follower follower;
     MecanumDrive drive = new MecanumDrive();

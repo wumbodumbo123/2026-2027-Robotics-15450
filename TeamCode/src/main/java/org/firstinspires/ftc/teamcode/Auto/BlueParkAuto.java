@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import static com.pedropathing.api.Paths.curve;
 import static com.pedropathing.api.Paths.line;
@@ -14,22 +14,24 @@ import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.lib.MecanumDrive;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
-@Autonomous(group = "Auto", name = "BlueShootAuto")
-public class BlueShootAuto extends OpMode {
+@Autonomous(group = "Auto", name = "BlueParkAuto")
+public class BlueParkAuto extends OpMode {
 
     private Follower follower;
     MecanumDrive drive = new MecanumDrive();
     private final PoseFactory p = PoseFactory.degrees();
 
-    private final Pose startPose = p.of(135, 24, -90);
-    private final Pose shootingPoseStart = p.of(84, 24, -90);
-    private final Pose ShootingPoseControl1 = p.of(84, 54, -90);
-    private final Pose ShootingPoseControl2 = p.of(136, 15, -90);
-    private final Pose endPose = p.of(132, 90, -90);
+    private final Pose startPose = p.of(9, 24, 90);
+    private final Pose shootingPoseStart = p.of(60, 24, 90);
+    private final Pose ShootingPoseControl1 = p.of(60, 54, 90);
+    private final Pose ShootingPoseControl2 = p.of(8, 15, 90);
+    private final Pose endPose = p.of(12, 90, 90);
 
     public void init() {
+
 
         follower = Constants.create(hardwareMap);
         drive.init(hardwareMap);
